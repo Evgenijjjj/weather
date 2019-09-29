@@ -95,4 +95,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    implementation project(path: ':core')
+    implementation project(path: ':domain')
 }
