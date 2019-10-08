@@ -7,13 +7,16 @@ import com.weather.domain.repositories.WeatherRepository
 import com.weather.domain.repositories.WeatherRepositoryImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class RepositoriesModule {
 
+    @Singleton
     @Provides
     fun provideWeatherConverter():WeatherConverter = WeatherConverterImpl()
 
+    @Singleton
     @Provides
     fun provideWeatherRepository(provider:WeatherProvider,converter:WeatherConverter):WeatherRepository{
         return WeatherRepositoryImpl(provider,converter)
