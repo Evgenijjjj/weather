@@ -1,7 +1,5 @@
 package com.weather.core.remote.helpers
 
-import com.weather.core.remote.helpers.Constants.Companion.BASE_URL_OPEN_WEATHER
-import com.weather.core.remote.services.OpenWeatherService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +7,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitFactory {
+interface ApiBuilder {
+    fun <T> buildApi(api: Class<T>): T
+}
+
+class RetrofitFactory(url:String):ApiBuilder{
 
     companion object{
 
@@ -33,8 +35,13 @@ class RetrofitFactory {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-
-        fun getOpenWeatherService() = getRetrofitInstance(BASE_URL_OPEN_WEATHER).create(OpenWeatherService::class.java)
     }
 
+    private val retrofit:Retrofit
+
+    init {
+        retrofit = getRetrofitInstance(url)
+    }
+
+    override fun <T> buildApi(api: Class<T>): T = retrofit.create(api)
 }

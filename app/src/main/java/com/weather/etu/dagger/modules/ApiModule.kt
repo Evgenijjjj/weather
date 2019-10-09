@@ -1,12 +1,15 @@
 package com.weather.etu.dagger.modules
 
-import com.weather.etu.api.ApiBuilder
-import com.weather.etu.api.RxMoshiApiBuilder
-import com.weather.etu.api.WEATHER_API
-import com.weather.etu.api.weather_api.WeatherApi
+import com.weather.core.remote.helpers.ApiBuilder
+import com.weather.core.remote.helpers.Constants.Companion.BASE_URL_OPEN_WEATHER
+import com.weather.core.remote.helpers.RetrofitFactory
+import com.weather.core.remote.providers.WeatherProvider
+import com.weather.core.remote.providers.WeatherProviderImpl
+import com.weather.core.remote.services.OpenWeatherService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+
 
 @Module
 class ApiModule {
@@ -17,12 +20,11 @@ class ApiModule {
 
     @Provides
     @Named(WEATHER_URL_NAME)
-    fun provideWeatherUrl() = WEATHER_API
+    fun provideWeatherUrl() = BASE_URL_OPEN_WEATHER
 
     @Provides
-    fun provideWeatherApiBuilder(@Named(WEATHER_URL_NAME) url: String): ApiBuilder = RxMoshiApiBuilder(url)
+    fun provideWeatherApiBuilder(@Named(WEATHER_URL_NAME) url: String): ApiBuilder = RetrofitFactory(url)
 
     @Provides
-    fun provideWeatherApi(apiBuilder: ApiBuilder): WeatherApi
-            = apiBuilder.buildApi(WeatherApi::class.java)
+    fun provideOpenWeatherService(apiBuilder: ApiBuilder) = apiBuilder.buildApi(OpenWeatherService::class.java)
 }

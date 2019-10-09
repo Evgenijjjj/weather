@@ -2,7 +2,7 @@ package com.weather.etu.app
 
 import android.app.Application
 import com.jhapp.mc.dagger.modules.AppModule
-import com.jhapp.mc.dagger.modules.InteractorsModule
+import com.jhapp.mc.dagger.modules.RepositoriesModule
 import com.weather.etu.dagger.components.AppComponent
 import com.weather.etu.dagger.components.DaggerAppComponent
 import com.weather.etu.dagger.modules.ApiModule
@@ -23,6 +23,6 @@ class App: Application() {
         .appModule(AppModule(applicationContext))
 //        .databaseModule(DatabaseModule())
         .apiModule(ApiModule())
-        .interactorsModule(InteractorsModule())
+        .repositoriesModule(RepositoriesModule())
         .build()
 }
