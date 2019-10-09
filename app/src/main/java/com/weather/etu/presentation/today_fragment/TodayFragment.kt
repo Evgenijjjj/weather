@@ -9,11 +9,11 @@ import com.weather.etu.presentation.BaseMainActivityFragment
 import kotlinx.android.synthetic.main.fragment_today.*
 
 
-class TodayFragment: BaseMainActivityFragment() {
+class TodayFragment: BaseMainActivityFragment<TodayFragmentViewModel>() {
 
     override val toolbar by lazy { f1_toolbar as Toolbar }
 
-    private val viewModel by lazy { ViewModelProviders
+    override val viewModel by lazy { ViewModelProviders
         .of(this)[TodayFragmentViewModel::class.java] }
 
     override val layoutId: Int

@@ -8,12 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.weather.etu.R
+import com.weather.etu.base.BaseActivity
 import com.weather.etu.presentation.chart_fragment.ChartFragment
 import com.weather.etu.presentation.interval_fragment.IntervalFragment
 import com.weather.etu.presentation.today_fragment.TodayFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainActivityViewModel>() {
 
     companion object {
         enum class STATE {
@@ -23,13 +24,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var viewModel: MainActivityViewModel
-
+    override val viewModel by lazy {
+        ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
 
         viewModel.stateLiveData.observe(this, Observer {
             when (it) {

@@ -1,7 +1,7 @@
 package com.weather.etu.dagger.components
 
 import com.weather.etu.dagger.modules.ApiModule
-import com.jhapp.mc.dagger.modules.AppModule
+import com.weather.etu.dagger.modules.AppModule
 import com.jhapp.mc.dagger.modules.RepositoriesModule
 import com.weather.etu.app.App
 import com.weather.etu.dagger.modules.ProvidersModule

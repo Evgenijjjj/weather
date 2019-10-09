@@ -3,8 +3,6 @@ package com.weather.etu.dagger.modules
 import com.weather.core.remote.helpers.ApiBuilder
 import com.weather.core.remote.helpers.Constants.Companion.BASE_URL_OPEN_WEATHER
 import com.weather.core.remote.helpers.RetrofitFactory
-import com.weather.core.remote.providers.WeatherProvider
-import com.weather.core.remote.providers.WeatherProviderImpl
 import com.weather.core.remote.services.OpenWeatherService
 import dagger.Module
 import dagger.Provides

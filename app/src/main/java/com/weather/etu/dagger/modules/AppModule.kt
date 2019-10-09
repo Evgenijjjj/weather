@@ -1,4 +1,4 @@
-package com.jhapp.mc.dagger.modules
+package com.weather.etu.dagger.modules
 
 import android.content.Context
 import dagger.Module

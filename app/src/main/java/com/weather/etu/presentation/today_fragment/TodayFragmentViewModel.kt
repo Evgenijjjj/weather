@@ -1,10 +1,9 @@
 package com.weather.etu.presentation.today_fragment
 
 import android.util.Log
-import com.weather.core.remote.providers.WeatherProviderImpl
-import com.weather.domain.converters.WeatherConverterImpl
+import androidx.lifecycle.MutableLiveData
+import com.weather.domain.models.CurrentWeather
 import com.weather.domain.repositories.WeatherRepository
-import com.weather.domain.repositories.WeatherRepositoryImpl
 import com.weather.etu.app.App
 import com.weather.etu.base.BaseViewModel
 import javax.inject.Inject
@@ -12,22 +11,18 @@ import javax.inject.Inject
 class TodayFragmentViewModel: BaseViewModel() {
 
     @Inject
-    lateinit var repository:WeatherRepository
+    lateinit var repository: WeatherRepository
+
+    val currentWeatherLiveData = MutableLiveData<CurrentWeather>()
 
     init {
         App.component.inject(this)
     }
 
-    //Тут ты уже сам MVVM делаешь через livedate
     fun fetchCurrentWeather(){
-        repository.fetchCurrentWeather(59.934280,30.335098)
-            .subscribe(
-                {
-                    Log.d("WeatherResponseTest",it.toString())
-                },
-                {
-                    Log.d("WeatherResponseTest",it.toString())
-                }
-            )
+        disposable.add(
+            repository.fetchCurrentWeather(59.934280,30.335098)
+                .safeSubscribe(currentWeatherLiveData::postValue)
+        )
     }
 }

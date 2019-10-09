@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.weather.etu.base.BaseFragment
+import com.weather.etu.base.BaseViewModel
 
-abstract class BaseMainActivityFragment: BaseFragment() {
+abstract class BaseMainActivityFragment<T: BaseViewModel>: BaseFragment<T>() {
 
     protected open val toolbar: Toolbar? = null
 
