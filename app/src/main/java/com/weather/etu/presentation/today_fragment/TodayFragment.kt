@@ -21,6 +21,8 @@ class TodayFragment: BaseMainActivityFragment<TodayFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchCurrentWeather()
+        withLocationPermission {
+            viewModel.fetchCurrentWeather()
+        }
     }
 }

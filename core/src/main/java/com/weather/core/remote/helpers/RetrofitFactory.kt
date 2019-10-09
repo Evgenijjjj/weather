@@ -11,13 +11,13 @@ interface ApiBuilder {
     fun <T> buildApi(api: Class<T>): T
 }
 
-class RetrofitFactory(url:String):ApiBuilder{
+class RetrofitFactory(url:String): ApiBuilder{
 
     companion object{
 
         private fun getOkHttpInstance(): OkHttpClient {
             val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.BODY
 
             return OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
@@ -37,7 +37,7 @@ class RetrofitFactory(url:String):ApiBuilder{
         }
     }
 
-    private val retrofit:Retrofit
+    private val retrofit: Retrofit
 
     init {
         retrofit = getRetrofitInstance(url)

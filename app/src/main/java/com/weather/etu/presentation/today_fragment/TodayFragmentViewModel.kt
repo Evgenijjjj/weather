@@ -21,7 +21,7 @@ class TodayFragmentViewModel: BaseViewModel() {
 
     fun fetchCurrentWeather(){
         disposable.add(
-            repository.fetchCurrentWeather(59.934280,30.335098)
+            repository.fetchCurrentWeather()
                 .safeSubscribe(currentWeatherLiveData::postValue)
         )
     }

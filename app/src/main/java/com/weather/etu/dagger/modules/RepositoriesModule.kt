@@ -1,5 +1,6 @@
-package com.jhapp.mc.dagger.modules
+package com.weather.etu.dagger.modules
 
+import android.location.LocationManager
 import com.weather.core.remote.providers.WeatherProvider
 import com.weather.domain.converters.WeatherConverter
 import com.weather.domain.converters.WeatherConverterImpl
@@ -14,11 +15,15 @@ class RepositoriesModule {
 
     @Singleton
     @Provides
-    fun provideWeatherConverter():WeatherConverter = WeatherConverterImpl()
+    fun provideWeatherConverter(): WeatherConverter = WeatherConverterImpl()
 
     @Singleton
     @Provides
-    fun provideWeatherRepository(provider:WeatherProvider,converter:WeatherConverter):WeatherRepository{
-        return WeatherRepositoryImpl(provider,converter)
+    fun provideWeatherRepository(
+        provider: WeatherProvider,
+        converter: WeatherConverter,
+        locationManager: LocationManager
+    ): WeatherRepository {
+        return WeatherRepositoryImpl(provider, converter, locationManager)
     }
 }

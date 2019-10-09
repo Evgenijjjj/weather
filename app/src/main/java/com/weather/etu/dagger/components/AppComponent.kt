@@ -2,10 +2,9 @@ package com.weather.etu.dagger.components
 
 import com.weather.etu.dagger.modules.ApiModule
 import com.weather.etu.dagger.modules.AppModule
-import com.jhapp.mc.dagger.modules.RepositoriesModule
+import com.weather.etu.dagger.modules.RepositoriesModule
 import com.weather.etu.app.App
 import com.weather.etu.dagger.modules.ProvidersModule
-import com.weather.etu.dagger.modules.ProvidersModule_ProvideWeatherProviderFactory
 import com.weather.etu.presentation.MainActivityViewModel
 import com.weather.etu.presentation.chart_fragment.ChartFragmentViewModel
 import com.weather.etu.presentation.interval_fragment.IntervalFragmentViewModel
