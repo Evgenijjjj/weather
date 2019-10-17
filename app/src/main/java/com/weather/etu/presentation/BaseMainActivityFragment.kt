@@ -32,6 +32,10 @@ abstract class BaseMainActivityFragment<T: BaseViewModel>: BaseFragment<T>(), Pe
         (activity as AppCompatActivity).setSupportActionBar(toolbar?:return)
     }
 
+    protected fun setTitle(title: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = title
+    }
+
     override fun withLocationPermission(action: () -> Unit) {
         if (locationPermissionGranted() && foregroundServicePermissionGranted()) {
             locationActions.clear()

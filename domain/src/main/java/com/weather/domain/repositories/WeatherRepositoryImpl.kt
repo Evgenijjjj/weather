@@ -1,14 +1,15 @@
 package com.weather.domain.repositories
 
 import android.annotation.SuppressLint
-import android.location.Location
 import android.location.LocationManager
-import android.util.Log
 import com.weather.core.remote.providers.WeatherProvider
 import com.weather.domain.converters.WeatherConverter
 import com.weather.domain.models.CurrentWeather
 import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WeatherRepositoryImpl(
     private val weatherProvider: WeatherProvider,
@@ -30,8 +31,15 @@ class WeatherRepositoryImpl(
             )
             .firstOrError()
             .flatMap { fetchCurrentWeather(it.latitude, it.longitude) }
+            .zipWith(getCurrentDay(), BiFunction { t1: CurrentWeather, t2: String ->
+                t1.copy(currentDay = t2.capitalize())
+            })
             .subscribeOn(Schedulers.io())
 
 
     }
+
+    private fun getCurrentDay(): Single<String> = Single.just(
+        SimpleDateFormat("EEEE", Locale.getDefault())
+            .format(Calendar.getInstance().time).toString())
 }

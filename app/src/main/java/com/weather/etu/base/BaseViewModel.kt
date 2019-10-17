@@ -13,20 +13,30 @@ abstract class BaseViewModel: ViewModel() {
     val errorLivaData = MutableLiveData<Throwable>()
 
     protected fun <T> Single<T>.safeSubscribe(onSuccess: (T) -> Unit) =
-        subscribeOn(Schedulers.io()).subscribe(onSuccess, ::onErrorHandled)
+        subscribeOn(Schedulers.io()).subscribe({ onSuccess(it, onSuccess) }, ::onErrorHandled)
 
     protected fun <T> Maybe<T>.safeSubscribe(onSuccess: (T) -> Unit) =
-        subscribeOn(Schedulers.io()).subscribe(onSuccess, ::onErrorHandled)
+        subscribeOn(Schedulers.io()).subscribe({ onSuccess(it, onSuccess) }, ::onErrorHandled)
 
     protected fun Completable.safeSubscribe(onSuccess: () -> Unit) =
-        subscribeOn(Schedulers.io()).subscribe(onSuccess, ::onErrorHandled)
+        subscribeOn(Schedulers.io()).subscribe({ onSuccessCompletable(onSuccess) }, ::onErrorHandled)
 
     protected fun <T> Observable<T>.safeSubscribe(onSuccess: (T) -> Unit) =
-        subscribeOn(Schedulers.io()).subscribe(onSuccess, ::onErrorHandled)
+        subscribeOn(Schedulers.io()).subscribe({ onSuccess(it, onSuccess) }, ::onErrorHandled)
 
     private fun onErrorHandled(t: Throwable) {
         Log.e(null, t.toString())
         errorLivaData.postValue(t)
+    }
+
+    private fun <T> onSuccess(value: T, action: (T) -> Unit) {
+        Log.d("onSuccess", value.toString())
+        action.invoke(value)
+    }
+
+    private fun onSuccessCompletable(action: () -> Unit) {
+        Log.d("onSuccess", "completable")
+        action.invoke()
     }
 
     override fun onCleared() {

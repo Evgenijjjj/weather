@@ -25,5 +25,8 @@ abstract class BaseFragment<T: BaseViewModel>: Fragment() {
         viewModel.errorLivaData.observe(this, Observer {
             showErrorSnackbar(view, it)
         })
+        bindViews?.invoke(view)
     }
+
+    protected open val bindViews: ((View) -> Unit)? = null
 }

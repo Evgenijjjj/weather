@@ -1,6 +1,5 @@
 package com.weather.etu.base
 
-import android.content.Context
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 
