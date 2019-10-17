@@ -4,12 +4,12 @@
     <item
         android:id="@+id/menu_first"
         android:icon="@android:drawable/btn_plus"
-        android:title="First" />
+        android:title="Today" />
 
     <item
         android:id="@+id/menu_second"
         android:icon="@android:drawable/btn_plus"
-        android:title="Second" />
+        android:title="Interval" />
 
     <item
         android:id="@+id/menu_third"
