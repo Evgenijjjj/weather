@@ -14,6 +14,7 @@ class TodayFragmentViewModel: BaseViewModel() {
     lateinit var repository: WeatherRepository
 
     val currentWeatherLiveData = MutableLiveData<CurrentWeather>()
+    val weatherForecastLiveData = MutableLiveData<List<CurrentWeather>>()
 
     init {
         App.component.inject(this)
@@ -23,6 +24,13 @@ class TodayFragmentViewModel: BaseViewModel() {
         disposable.add(
             repository.fetchCurrentWeather()
                 .safeSubscribe(currentWeatherLiveData::postValue)
+        )
+    }
+
+    fun fetchWeatherForecast() {
+        disposable.add(
+            repository.fetchWeatherForecast()
+                .safeSubscribe(weatherForecastLiveData::postValue)
         )
     }
 }

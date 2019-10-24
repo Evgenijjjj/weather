@@ -10,5 +10,18 @@ data class CurrentWeather(
     val directionWind: String,// Ю-В, В-З, ....
     val description: String, // ясно, .....
     val name: String,
-    val currentDay: String? = null
-)
+    val currentDay: String? = null,
+    val iconUrl: String,
+    val toolbarAlpha: Float,
+    val dateString: String? = null
+) {
+//    companion object {
+//        enum class WEATHER_TYPE(val key: String) {
+//            RAINY("rainy"),
+//            SNOWY("snowy"),
+//            SUNNY("sunny"),
+//            THUNDERSTORM("thunderstorm"),
+//            WINDY("windy")
+//        }
+//    }
+}

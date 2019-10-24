@@ -25,7 +25,7 @@ abstract class BaseViewModel: ViewModel() {
         subscribeOn(Schedulers.io()).subscribe({ onSuccess(it, onSuccess) }, ::onErrorHandled)
 
     private fun onErrorHandled(t: Throwable) {
-        Log.e(null, t.toString())
+        t.printStackTrace()
         errorLivaData.postValue(t)
     }
 
